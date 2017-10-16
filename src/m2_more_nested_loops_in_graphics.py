@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Chengqian Lyu HERE.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -49,10 +49,32 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
-
+    original_lowerleftcorner_x = rectangle.get_lower_left_corner().x
+    original_lowerleftcorner_y = rectangle.get_lower_left_corner().y
+    original_upperrightcorner_x = rectangle.get_upper_right_corner().x
+    original_upperrightcorner_y = rectangle.get_upper_right_corner().y
+    x1 = original_lowerleftcorner_x
+    y1 = original_lowerleftcorner_y
+    x2 = original_upperrightcorner_x
+    y2 = original_upperrightcorner_y
+    width = rectangle.get_width()
+    height = rectangle.get_height()
+    for k in range(n):
+        for j in range(k + 1):
+            newrectangle = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            newrectangle.attach_to(window)
+            x1 = x1 + width
+            x2 = x2 + width
+            window.render(0.1)
+        x1 = original_lowerleftcorner_x
+        x2 = original_upperrightcorner_x
+        y1 = y1 - height
+        y2 = y2 - height
+        x1 = x1 - width/2*(k + 1)
+        x2 = x2 - width/2*(k + 1)
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
